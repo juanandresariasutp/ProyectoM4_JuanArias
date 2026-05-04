@@ -198,13 +198,6 @@ Las siguientes variables deben configurarse en `.env`:
 
 ---
 
-## 📖 Documentación
-
-Ver archivos:
-- [INSTRUCCIONES-PROYECTO.md](./INSTRUCCIONES-PROYECTO.md) - Instrucciones técnicas completas
-- [GUIA-COMMITS.md](./GUIA-COMMITS.md) - Guía de commits semánticos
-- [CHECKLIST-USUARIO.md](./CHECKLIST-USUARIO.md) - Checklist de tareas por hito
-
 ---
 
 ## 🤝 Contribuir
