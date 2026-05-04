@@ -1,4 +1,5 @@
 import { useState, type FormEvent } from 'react'
+import { Link } from 'react-router-dom'
 
 import { useAuthContext } from '../features/auth/AuthContext'
 
@@ -68,6 +69,10 @@ const LoginForm = () => {
       <button type="button" onClick={loginWithProvider} disabled={isBusy}>
         Continuar con Google
       </button>
+
+      <p>
+        ¿No tienes cuenta? <Link to="/register">Regístrate</Link>
+      </p>
     </form>
   )
 }
