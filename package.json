@@ -13,6 +13,8 @@
     "test:coverage": "vitest --coverage"
   },
   "dependencies": {
+    "@aws-sdk/client-ses": "^3.1042.0",
+    "@vercel/node": "^5.7.15",
     "aws-sdk": "^2.1693.0",
     "firebase": "^12.12.1",
     "react": "^19.2.5",

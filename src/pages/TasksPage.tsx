@@ -2,6 +2,7 @@ import { useMemo, useState } from 'react'
 
 import TodoForm from '../components/TodoForm'
 import TodoList from '../components/TodoList'
+import SendEmailButton from '../components/SendEmailButton'
 import { useAuthContext } from '../features/auth/AuthContext'
 import { useTasks } from '../hooks/useTasks'
 import type { Task } from '../types/Task'
@@ -65,6 +66,10 @@ const TasksPage = () => {
 
         {error ? <p role="alert">{error}</p> : null}
         {loading ? <p>Cargando tareas...</p> : null}
+
+        {user && tasks.length > 0 ? (
+          <SendEmailButton userEmail={user.email || ''} tasks={tasks} />
+        ) : null}
 
         <TodoList
           tasks={tasks}
