@@ -3,14 +3,25 @@ import { render, screen, waitFor } from '@testing-library/react'
 import userEvent from '@testing-library/user-event'
 
 const mockRegister = vi.fn().mockResolvedValue({ user: { uid: 'uid-test' } })
+const mockLogout = vi.fn().mockResolvedValue(undefined)
+const mockNavigate = vi.fn()
 
 vi.mock('../../src/features/auth/AuthContext', () => ({
   useAuthContext: () => ({
     register: mockRegister,
+    logout: mockLogout,
     loading: false,
     error: null,
   }),
 }))
+
+vi.mock('react-router-dom', async () => {
+  const actual = await vi.importActual('react-router-dom')
+  return {
+    ...actual,
+    useNavigate: () => mockNavigate,
+  }
+})
 
 import RegisterForm from '../../src/components/RegisterForm'
 
