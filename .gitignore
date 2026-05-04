@@ -37,3 +37,10 @@ Thumbs.db
 .idea
 *.swp
 *.swo
+
+# Proyecto integrador: documentos de guía solo locales
+CHECKLIST-USUARIO.md
+INSTRUCCIONES-PROYECTO.md
+GUIA-COMMITS.md
+Proyecto M4.pdf
+Commits.pdf
