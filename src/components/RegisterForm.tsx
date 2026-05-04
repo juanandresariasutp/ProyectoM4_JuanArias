@@ -1,4 +1,5 @@
 import { useState, type FormEvent } from 'react'
+import { useNavigate } from 'react-router-dom'
 
 import { useAuthContext } from '../features/auth/AuthContext'
 
@@ -8,9 +9,10 @@ const initialValues = {
 }
 
 const RegisterForm = () => {
-  const { register, loading, error } = useAuthContext()
+  const { register, logout, loading, error } = useAuthContext()
   const [formValues, setFormValues] = useState(initialValues)
   const [submitting, setSubmitting] = useState(false)
+  const navigate = useNavigate()
 
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = event.target
@@ -27,7 +29,9 @@ const RegisterForm = () => {
 
     try {
       await register(formValues)
+      await logout()
       setFormValues(initialValues)
+      navigate('/login')
     } finally {
       setSubmitting(false)
     }
