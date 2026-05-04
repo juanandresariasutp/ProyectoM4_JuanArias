@@ -1,5 +1,5 @@
 import { useState, type FormEvent } from 'react'
-import { Link } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 
 import { useAuthContext } from '../features/auth/AuthContext'
 
@@ -12,6 +12,7 @@ const LoginForm = () => {
   const { login, loginWithProvider, loading, error } = useAuthContext()
   const [formValues, setFormValues] = useState(initialValues)
   const [submitting, setSubmitting] = useState(false)
+  const navigate = useNavigate()
 
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = event.target
@@ -29,6 +30,17 @@ const LoginForm = () => {
     try {
       await login(formValues)
       setFormValues(initialValues)
+      navigate('/tasks')
+    } finally {
+      setSubmitting(false)
+    }
+  }
+
+  const handleGoogle = async () => {
+    setSubmitting(true)
+    try {
+      await loginWithProvider()
+      navigate('/tasks')
     } finally {
       setSubmitting(false)
     }
@@ -66,7 +78,7 @@ const LoginForm = () => {
         {isBusy ? 'Ingresando...' : 'Entrar'}
       </button>
 
-      <button type="button" onClick={loginWithProvider} disabled={isBusy}>
+      <button type="button" onClick={handleGoogle} disabled={isBusy}>
         Continuar con Google
       </button>
 
