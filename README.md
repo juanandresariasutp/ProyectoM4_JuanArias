@@ -173,6 +173,10 @@ Las siguientes variables deben configurarse en `.env`:
 
 ## 🚀 Deploy en Vercel
 
+**🎉 Aplicación en Producción:** https://proyecto-m4-juan-arias.vercel.app
+
+### Pasos de Despliegue
+
 1. **Conectar repositorio GitHub con Vercel**
 2. **Configurar variables de entorno en Vercel**
 3. **Deploy automático** en cada push a main
@@ -182,25 +186,49 @@ Las siguientes variables deben configurarse en `.env`:
 - Frontend: `VITE_FIREBASE_*` (con prefijo VITE_)
 - Serverless: `AWS_*` (sin prefijo)
 
+### Flujo en Producción
+
+1. Registrarse con correo o Google OAuth
+2. Iniciar sesión
+3. Crear, editar y eliminar tareas
+4. Enviar resumen de tareas por email
+
 ---
 
 ## 📝 Hitos del Proyecto
 
-- [ ] Hito 1: Setup Inicial
-- [ ] Hito 2: Configuración de Firebase
-- [ ] Hito 3: Autenticación
-- [ ] Hito 4: Rutas Protegidas
-- [ ] Hito 5: Modelo de Datos y Seguridad
-- [ ] Hito 6: CRUD de Tareas
-- [ ] Hito 7: Email con AWS SES
-- [ ] Hito 8: Testing
-- [ ] Hito 9: Deploy en Vercel
+- [x] Hito 1: Setup Inicial
+- [x] Hito 2: Configuración de Firebase
+- [x] Hito 3: Autenticación
+- [x] Hito 4: Rutas Protegidas
+- [x] Hito 5: Modelo de Datos y Seguridad
+- [x] Hito 6: CRUD de Tareas
+- [x] Hito 7: Email con AWS SES
+- [x] Hito 8: Testing (29 tests pasando)
+- [x] Hito 9: Deploy en Vercel
+
+**Estado:** ✅ Proyecto completo y funcional en producción
 
 ---
 
 ---
 
-## 🤝 Contribuir
+## � Notas sobre el Desarrollo con IA
+
+Este proyecto fue desarrollado utilizando GitHub Copilot como herramienta de asistencia:
+
+- **Scaffolding y arquitectura:** Generación de estructura de carpetas y configuración inicial
+- **Componentes React:** Escritura de componentes con TypeScript y patrones reutilizables
+- **Servicios:** Integración con Firebase Authentication, Firestore y AWS SES
+- **Testing:** Creación de tests unitarios y de componentes con Vitest y React Testing Library
+- **Configuración:** Setup de Vite, Firebase, Vercel Functions y variables de entorno
+- **Debugging:** Diagnóstico de errores en rutas, autenticación OAuth y manejo de CORS
+
+La IA facilitó la velocidad de desarrollo mientras el estudiante se enfocó en la arquitectura, flujos de negocio y toma de decisiones técnicas.
+
+---
+
+## �🤝 Contribuir
 
 Este proyecto es un proyecto integrador de aprendizaje. Siéntete libre de sugerir mejoras o reportar issues.
 
