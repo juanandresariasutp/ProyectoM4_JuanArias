@@ -1,5 +1,5 @@
-import { useState, type FormEvent } from 'react'
-import { Link } from 'react-router-dom'
+import { useEffect, useState, type FormEvent } from 'react'
+import { Link, useNavigate } from 'react-router-dom'
 
 import { useAuthContext } from '../features/auth/AuthContext'
 
@@ -9,9 +9,11 @@ const initialValues = {
 }
 
 const RegisterForm = () => {
+  const navigate = useNavigate()
   const { register, loginWithProvider, logout, loading, error } = useAuthContext()
   const [formValues, setFormValues] = useState(initialValues)
   const [submitting, setSubmitting] = useState(false)
+  const [successMessage, setSuccessMessage] = useState(false)
 
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = event.target
@@ -30,10 +32,21 @@ const RegisterForm = () => {
       await register(formValues)
       await logout()
       setFormValues(initialValues)
+      setSuccessMessage(true)
     } finally {
       setSubmitting(false)
     }
   }
+
+  useEffect(() => {
+    if (successMessage) {
+      const timer = setTimeout(() => {
+        navigate('/login', { replace: true })
+      }, 3000)
+
+      return () => clearTimeout(timer)
+    }
+  }, [successMessage, navigate])
 
   const handleGoogle = async () => {
     setSubmitting(true)
@@ -45,6 +58,20 @@ const RegisterForm = () => {
   }
 
   const isBusy = loading || submitting
+
+  if (successMessage) {
+    return (
+      <div className="success-container">
+        <div className="success-message">
+          <h2>¡Cuenta creada con éxito! ✓</h2>
+          <p>Tu registro ha sido completado. Serás redirigido al login en 3 segundos...</p>
+          <Link to="/login" className="btn btn-primary">
+            Ir al login ahora
+          </Link>
+        </div>
+      </div>
+    )
+  }
 
   return (
     <form onSubmit={handleSubmit}>

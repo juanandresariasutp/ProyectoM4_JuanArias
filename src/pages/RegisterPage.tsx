@@ -10,6 +10,7 @@ const RegisterPage = () => {
   const { user, loading } = useAuthContext()
 
   useEffect(() => {
+    // Si ya está autenticado, redirigir a /tasks
     if (user && !loading) {
       navigate('/tasks', { replace: true })
     }
