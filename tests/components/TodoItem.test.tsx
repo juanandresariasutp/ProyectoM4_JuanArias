@@ -32,7 +32,7 @@ describe('TodoItem', () => {
     expect(screen.getByText('Test Description')).toBeInTheDocument()
   })
 
-  it('muestra "Sin descripción" cuando no hay descripción', () => {
+  it('muestra "—" cuando no hay descripción', () => {
     const taskSinDesc: Task = { ...mockTask, description: undefined }
     const mockEdit = vi.fn()
     const mockDelete = vi.fn()
@@ -47,10 +47,10 @@ describe('TodoItem', () => {
       />
     )
 
-    expect(screen.getByText('Sin descripción')).toBeInTheDocument()
+    expect(screen.getByText('—')).toBeInTheDocument()
   })
 
-  it('muestra "(Completada)" cuando la tarea está completada', () => {
+  it('muestra badge "Completada" cuando la tarea está completada', () => {
     const completedTask: Task = { ...mockTask, completed: true }
     const mockEdit = vi.fn()
     const mockDelete = vi.fn()
@@ -65,7 +65,7 @@ describe('TodoItem', () => {
       />
     )
 
-    expect(screen.getByLabelText('completada')).toBeInTheDocument()
+    expect(screen.getByLabelText('Completada')).toBeInTheDocument()
   })
 
   it('invoca onEdit cuando se pulsa Editar', async () => {
@@ -87,7 +87,7 @@ describe('TodoItem', () => {
     expect(mockEdit).toHaveBeenCalledWith(mockTask)
   })
 
-  it('invoca onDelete cuando se pulsa Eliminar', async () => {
+  it('invoca onDelete cuando se pulsa Borrar', async () => {
     const mockEdit = vi.fn()
     const mockDelete = vi.fn()
     const mockToggle = vi.fn()
@@ -102,11 +102,11 @@ describe('TodoItem', () => {
       />
     )
 
-    await user.click(screen.getByRole('button', { name: /Eliminar/i }))
+    await user.click(screen.getByRole('button', { name: /Borrar/i }))
     expect(mockDelete).toHaveBeenCalledWith(mockTask.id)
   })
 
-  it('invoca onToggleComplete cuando se pulsa Marcar completada', async () => {
+  it('invoca onToggleComplete cuando se pulsa el botón de estado', async () => {
     const mockEdit = vi.fn()
     const mockDelete = vi.fn()
     const mockToggle = vi.fn()
@@ -121,7 +121,7 @@ describe('TodoItem', () => {
       />
     )
 
-    await user.click(screen.getByRole('button', { name: /Marcar completada/i }))
+    await user.click(screen.getByRole('button', { name: /Pendiente/i }))
     expect(mockToggle).toHaveBeenCalledWith(mockTask)
   })
 })

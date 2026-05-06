@@ -1,4 +1,5 @@
 import { useEffect, useState, type FormEvent } from 'react'
+import './TodoForm.css'
 
 type TaskFormValues = {
   title: string
@@ -65,29 +66,34 @@ const TodoForm = ({
   const isBusy = loading || submitting
 
   return (
-    <form onSubmit={handleSubmit}>
+    <form onSubmit={handleSubmit} className="todo-form">
       <h2>{submitLabel}</h2>
 
-      <label htmlFor="task-title">Título</label>
-      <input
-        id="task-title"
-        name="title"
-        type="text"
-        value={formValues.title}
-        onChange={handleChange}
-        required
-      />
+      <div className="form-field-group">
+        <label htmlFor="task-title">Título de la tarea</label>
+        <input
+          id="task-title"
+          name="title"
+          type="text"
+          placeholder="Ej: Terminar proyecto..."
+          value={formValues.title}
+          onChange={handleChange}
+          required
+        />
+      </div>
 
-      <label htmlFor="task-description">Descripción</label>
-      <textarea
-        id="task-description"
-        name="description"
-        value={formValues.description ?? ''}
-        onChange={handleChange}
-        rows={4}
-      />
+      <div className="form-field-group">
+        <label htmlFor="task-description">Descripción</label>
+        <textarea
+          id="task-description"
+          name="description"
+          placeholder="Agrega detalles sobre la tarea (opcional)"
+          value={formValues.description ?? ''}
+          onChange={handleChange}
+        />
+      </div>
 
-      <label htmlFor="task-completed">
+      <div className="form-checkbox-group">
         <input
           id="task-completed"
           name="completed"
@@ -95,18 +101,20 @@ const TodoForm = ({
           checked={formValues.completed}
           onChange={handleChange}
         />
-        Completada
-      </label>
+        <label htmlFor="task-completed">Marcar como completada al crear</label>
+      </div>
 
-      <button type="submit" disabled={isBusy}>
-        {isBusy ? 'Guardando...' : submitLabel}
-      </button>
-
-      {onCancel ? (
-        <button type="button" onClick={onCancel} disabled={isBusy}>
-          Cancelar
+      <div className="form-button-group">
+        <button type="submit" className="btn-submit" disabled={isBusy}>
+          {isBusy ? '⏳ Guardando...' : submitLabel}
         </button>
-      ) : null}
+
+        {onCancel ? (
+          <button type="button" className="btn-cancel" onClick={onCancel} disabled={isBusy}>
+            Cancelar
+          </button>
+        ) : null}
+      </div>
     </form>
   )
 }

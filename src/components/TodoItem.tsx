@@ -8,27 +8,63 @@ type TodoItemProps = {
 }
 
 const TodoItem = ({ task, onEdit, onDelete, onToggleComplete }: TodoItemProps) => {
-  return (
-    <article>
-      <h3>
-        {task.title}{' '}
-        {task.completed ? <span aria-label="completada">(Completada)</span> : null}
-      </h3>
-      {task.description ? <p>{task.description}</p> : <p>Sin descripción</p>}
-      <small>Creada: {new Date(task.createdAt).toLocaleString()}</small>
+  const formattedDate = new Date(task.createdAt).toLocaleDateString('es-ES', {
+    day: 'numeric',
+    month: 'short',
+    year: 'numeric'
+  })
 
-      <div>
-        <button type="button" onClick={() => onToggleComplete(task)}>
-          {task.completed ? 'Marcar pendiente' : 'Marcar completada'}
-        </button>
-        <button type="button" onClick={() => onEdit(task)}>
-          Editar
-        </button>
-        <button type="button" onClick={() => onDelete(task.id)}>
-          Eliminar
-        </button>
-      </div>
-    </article>
+  return (
+    <tr>
+      <td>
+        <div className="todo-status">
+          <button
+            type="button"
+            className={`status-badge ${task.completed ? 'completed' : 'pending'}`}
+            onClick={() => onToggleComplete(task)}
+            title={task.completed ? 'Marcar como pendiente' : 'Marcar como completada'}
+            aria-label={task.completed ? 'Completada' : 'Pendiente'}
+          >
+            {task.completed ? '✓' : '○'}
+          </button>
+        </div>
+      </td>
+      <td>
+        <div className={`todo-title ${task.completed ? 'completed' : ''}`}>
+          {task.title}
+        </div>
+      </td>
+      <td>
+        <div className="todo-description">
+          {task.description || '—'}
+        </div>
+      </td>
+      <td>
+        <div className="todo-date">
+          {formattedDate}
+        </div>
+      </td>
+      <td>
+        <div className="todo-actions">
+          <button 
+            type="button" 
+            className="btn-edit"
+            onClick={() => onEdit(task)}
+            title="Editar"
+          >
+            Editar
+          </button>
+          <button 
+            type="button" 
+            className="btn-delete"
+            onClick={() => onDelete(task.id)}
+            title="Eliminar"
+          >
+            Borrar
+          </button>
+        </div>
+      </td>
+    </tr>
   )
 }
 

@@ -1,0 +1,243 @@
+.todos-table {
+  width: 100%;
+  border-collapse: collapse;
+  background: #1a1a1a;
+  border: 1px solid #2a2a2a;
+  border-radius: 8px;
+  overflow: hidden;
+}
+
+.todos-table thead {
+  background: #0f0f0f;
+  border-bottom: 2px solid #2a2a2a;
+}
+
+.todos-table th {
+  padding: 1rem;
+  text-align: left;
+  color: #d6d6d6;
+  font-weight: 600;
+  font-size: 0.9rem;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.todos-table tbody tr {
+  border-bottom: 1px solid #2a2a2a;
+  transition: background-color 0.2s ease;
+}
+
+.todos-table tbody tr:hover {
+  background: rgba(99, 102, 241, 0.06);
+}
+
+.todos-table tbody tr:last-child {
+  border-bottom: none;
+}
+
+.todos-table td {
+  padding: 1rem;
+  color: #e5e5e5;
+  font-size: 0.95rem;
+  vertical-align: top;
+}
+
+.todo-status {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.status-badge {
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.75rem;
+  cursor: pointer;
+  border: 2px solid #2a2a2a;
+  transition: all 0.2s ease;
+  flex-shrink: 0;
+}
+
+.status-badge.pending {
+  background: rgba(99, 102, 241, 0.15);
+  border-color: #6366f1;
+}
+
+.status-badge.pending:hover {
+  background: rgba(99, 102, 241, 0.25);
+  border-color: #7c7fed;
+}
+
+.status-badge.completed {
+  background: rgba(74, 222, 128, 0.15);
+  border-color: #4ade80;
+}
+
+.status-badge.completed:hover {
+  background: rgba(74, 222, 128, 0.25);
+  border-color: #86efac;
+}
+
+.todo-checkbox {
+  cursor: pointer;
+}
+
+.todo-title {
+  font-weight: 500;
+  color: #f0f0f0;
+}
+
+.todo-title.completed {
+  color: #808080;
+  text-decoration: line-through;
+}
+
+.todo-description {
+  color: #a0a0a0;
+  font-size: 0.85rem;
+  line-height: 1.4;
+  margin-top: 0.25rem;
+  word-break: break-word;
+}
+
+.todo-date {
+  color: #666;
+  font-size: 0.8rem;
+}
+
+.todo-actions {
+  display: flex;
+  gap: 0.5rem;
+  white-space: nowrap;
+}
+
+.todo-actions button {
+  padding: 0.4rem 0.75rem;
+  font-size: 0.8rem;
+  border: 1px solid #2a2a2a;
+  border-radius: 4px;
+  background: transparent;
+  color: #d6d6d6;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.todo-actions .btn-edit {
+  color: #6366f1;
+  border-color: #3d3f9d;
+}
+
+.todo-actions .btn-edit:hover {
+  background: rgba(99, 102, 241, 0.1);
+  border-color: #6366f1;
+}
+
+.todo-actions .btn-delete {
+  color: #ff8a8a;
+  border-color: #4a2a2a;
+}
+
+.todo-actions .btn-delete:hover {
+  background: rgba(255, 138, 138, 0.1);
+  border-color: #ff8a8a;
+}
+
+/* Mobile first: Stack layout */
+@media (max-width: 767px) {
+  .todos-table {
+    display: block;
+    border: none;
+    background: transparent;
+  }
+
+  .todos-table thead {
+    display: none;
+  }
+
+  .todos-table tbody {
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+  }
+
+  .todos-table tbody tr {
+    display: flex;
+    flex-direction: column;
+    border: 1px solid #2a2a2a;
+    border-radius: 8px;
+    background: #1a1a1a;
+    padding: 0;
+    border-bottom: 1px solid #2a2a2a;
+  }
+
+  .todos-table tbody tr:hover {
+    background: #1f1f1f;
+  }
+
+  .todos-table td {
+    display: flex;
+    flex-direction: column;
+    padding: 0.75rem 1rem;
+    border-bottom: 1px solid #2a2a2a;
+    border: none;
+  }
+
+  .todos-table td:first-child {
+    padding-top: 1rem;
+  }
+
+  .todos-table td:last-child {
+    border-bottom: none;
+    padding-bottom: 1rem;
+  }
+
+  .todos-table td::before {
+    content: attr(data-label);
+    font-weight: 600;
+    color: #b0b0b0;
+    font-size: 0.75rem;
+    margin-bottom: 0.35rem;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+  }
+
+  .todo-status {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .todo-description {
+    margin-top: 0.5rem;
+  }
+
+  .todo-actions {
+    width: 100%;
+    justify-content: space-between;
+    gap: 0.35rem;
+  }
+
+  .todo-actions button {
+    flex: 1;
+    padding: 0.5rem 0.5rem;
+    font-size: 0.75rem;
+  }
+}
+
+@media (min-width: 768px) {
+  .todos-table th:nth-child(2) {
+    width: 30%;
+  }
+
+  .todos-table th:nth-child(3) {
+    width: 25%;
+  }
+
+  .todos-table th:last-child {
+    width: 15%;
+    text-align: center;
+  }
+}

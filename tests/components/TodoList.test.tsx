@@ -109,13 +109,13 @@ describe('TodoList', () => {
       />
     )
 
-    const deleteButton = screen.getByRole('button', { name: /Eliminar/i })
+    const deleteButton = screen.getByRole('button', { name: /Borrar/i })
     await user.click(deleteButton)
 
     expect(mockDelete).toHaveBeenCalledWith(mockTask.id)
   })
 
-  it('invoca onToggleComplete cuando se pulsa Marcar completada', async () => {
+  it('invoca onToggleComplete cuando se pulsa el botón de estado', async () => {
     const mockEdit = vi.fn()
     const mockDelete = vi.fn()
     const mockToggle = vi.fn()
@@ -130,7 +130,7 @@ describe('TodoList', () => {
       />
     )
 
-    const toggleButton = screen.getByRole('button', { name: /Marcar completada/i })
+    const toggleButton = screen.getByRole('button', { name: /Pendiente/i })
     await user.click(toggleButton)
 
     expect(mockToggle).toHaveBeenCalledWith(mockTask)

@@ -6,6 +6,7 @@ import SendEmailButton from '../components/SendEmailButton'
 import { useAuthContext } from '../features/auth/AuthContext'
 import { useTasks } from '../hooks/useTasks'
 import type { Task } from '../types/Task'
+import './TasksPage.css'
 
 const emptyTaskValues = {
   title: '',
@@ -47,37 +48,46 @@ const TasksPage = () => {
   }
 
   return (
-    <main>
-      <section>
-        <h1>Tareas</h1>
-        {user ? <p>Sesión iniciada como {user.email}</p> : null}
+    <main className="tasks-page">
+      <div className="tasks-container">
+        <div className="tasks-header">
+          <h1>📋 Mis Tareas</h1>
+          <div className="tasks-user-info">
+            {user && <div className="tasks-email">Sesión: <strong>{user.email}</strong></div>}
+            <button type="button" className="btn-logout" onClick={logout}>
+              Cerrar sesión
+            </button>
+          </div>
+        </div>
 
-        <button type="button" onClick={logout}>
-          Cerrar sesión
-        </button>
+        {error ? <div className="error-alert">{error}</div> : null}
+        {loading && <div className="loading-msg">Cargando tareas...</div>}
 
-        <TodoForm
-          initialValues={formValues}
-          submitLabel={editingTask ? 'Actualizar tarea' : 'Crear tarea'}
-          onSubmit={handleSubmit}
-          onCancel={editingTask ? () => setEditingTask(null) : undefined}
-          loading={loading}
-        />
-
-        {error ? <p role="alert">{error}</p> : null}
-        {loading ? <p>Cargando tareas...</p> : null}
+        <div className="tasks-form-section">
+          <TodoForm
+            initialValues={formValues}
+            submitLabel={editingTask ? 'Actualizar tarea' : 'Crear tarea'}
+            onSubmit={handleSubmit}
+            onCancel={editingTask ? () => setEditingTask(null) : undefined}
+            loading={loading}
+          />
+        </div>
 
         {user && tasks.length > 0 ? (
-          <SendEmailButton userEmail={user.email || ''} tasks={tasks} />
+          <div style={{ marginBottom: '1.5rem' }}>
+            <SendEmailButton userEmail={user.email || ''} tasks={tasks} />
+          </div>
         ) : null}
 
-        <TodoList
-          tasks={tasks}
-          onEdit={setEditingTask}
-          onDelete={remove}
-          onToggleComplete={handleToggleComplete}
-        />
-      </section>
+        <div className="tasks-list-section">
+          <TodoList
+            tasks={tasks}
+            onEdit={setEditingTask}
+            onDelete={remove}
+            onToggleComplete={handleToggleComplete}
+          />
+        </div>
+      </div>
     </main>
   )
 }
