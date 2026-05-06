@@ -1,17 +1,18 @@
-# 📋 Gestor Estratégico de Tareas
+# 📋 GestorTareas — Aplicación de gestión de tareas
 
-Aplicación web SPA para gestionar tareas diarias desarrollada con React + TypeScript + Firebase + AWS SES.
+Aplicación web SPA minimalista para crear, organizar y compartir tareas personales o de equipo. Interfaz responsive (mobile-first) y tema oscuro, desarrollada con React + TypeScript, Firebase y AWS SES.
 
-## 📋 Tabla de Contenidos
+## Contenido
 
-- [Stack Tecnológico](#stack-tecnológico)
-- [Instrucciones de Instalación](#instrucciones-de-instalación)
-- [Configuración del Proyecto](#configuración-del-proyecto)
-- [Scripts Disponibles](#scripts-disponibles)
-- [Estructura del Proyecto](#estructura-del-proyecto)
-- [Variables de Entorno](#variables-de-entorno)
-- [Desarrollo](#desarrollo)
-- [Deploy](#deploy)
+- Stack tecnológico
+- Instalación rápida
+- Configuración (Firebase, AWS SES)
+- Scripts útiles
+- Estructura del proyecto
+- Funcionalidades de la interfaz (UI)
+- Variables de entorno
+- Desarrollo y pruebas
+- Deploy en Vercel
 
 ---
 
@@ -20,117 +21,111 @@ Aplicación web SPA para gestionar tareas diarias desarrollada con React + TypeS
 - **Frontend:** React 19 + TypeScript
 - **Build Tool:** Vite 8
 - **Enrutamiento:** React Router 7
-- **Backend:** Firebase (Authentication + Firestore)
-- **Notificaciones:** AWS SES
+- **Backend / BBDD:** Firebase (Authentication + Firestore)
+- **Emails:** AWS SES (vía Vercel Function)
 - **Testing:** Vitest + React Testing Library
 - **Deploy:** Vercel
 
+**Principios de diseño:** mobile-first, accesibilidad básica (roles/aria), UI minimalista en tonos oscuros.
+
 ---
 
-## 📦 Instrucciones de Instalación
+## 📦 Instalación rápida
 
-### Requisitos Previos
-- Node.js 16+ y npm 7+
+### Requisitos
+- Node.js 16+ y npm
 - Cuenta de Firebase
 - Cuenta de AWS (para SES)
 
 ### Pasos
 
-1. **Clonar el repositorio:**
+1. Clona el repositorio:
 ```bash
 git clone <URL_DEL_REPOSITORIO>
 cd proyecto-integrador
 ```
 
-2. **Instalar dependencias:**
+2. Instala dependencias:
 ```bash
 npm install
 ```
 
-3. **Configurar variables de entorno:**
+3. Copia la plantilla de variables de entorno y rellena con tus credenciales:
 ```bash
 cp .env.example .env
 # Edita .env y completa con tus credenciales
 ```
 
-4. **Iniciar servidor de desarrollo:**
+4. Inicia el servidor de desarrollo:
 ```bash
 npm run dev
 ```
 
-La aplicación estará disponible en `http://localhost:5173/`
+Abre `http://localhost:5173` (o el puerto que muestre Vite).
 
 ---
 
-## ⚙️ Configuración del Proyecto
-
-### Firebase Setup
-
-1. Ir a [Firebase Console](https://console.firebase.google.com)
-2. Crear nuevo proyecto
-3. Habilitar Authentication (Email/Password y Google)
-4. Crear Firestore Database
-5. Copiar credenciales a `.env`
-
-### AWS SES Setup
-
-1. Ir a [AWS Console](https://aws.amazon.com/console/)
-2. Habilitar SES en la región deseada
-3. Verificar email para envíos
-4. Copiar credenciales a `.env` y variables de Vercel
-
----
-
-## 🚀 Scripts Disponibles
-
-```bash
-# Desarrollo
-npm run dev          # Iniciar servidor de desarrollo
-
-# Build
-npm run build        # Compilar para producción
-
-# Testing
-npm run test         # Ejecutar tests
-npm run test:ui      # Tests con interfaz visual
-npm run test:coverage # Generar reporte de cobertura
-
-# Linting
-npm run lint         # Verificar código
-
-# Preview
-npm run preview      # Preview de build de producción
-```
-
----
-
-## 📁 Estructura del Proyecto
+## 📁 Estructura del Proyecto (resumen)
 
 ```
 src/
-├── pages/              # Páginas principales (Login, Register, Tasks)
-├── components/         # Componentes reutilizables
+├── pages/              # Páginas (Login, Register, Tasks, About)
+├── components/         # Componentes reutilizables (Navbar, Footer, TodoForm, TodoList, TodoItem...)
 ├── features/           # Lógica por dominio (auth, tasks)
 ├── services/           # Integraciones (Firebase, API)
 ├── routes/             # Configuración de rutas
 ├── hooks/              # Custom hooks (useAuth, useTasks)
-├── types/              # Interfaces y tipos TypeScript
-├── utils/              # Funciones utilitarias
+├── types/              # Tipos TypeScript
 ├── App.tsx             # Componente raíz
 └── main.tsx            # Punto de entrada
-functions/             # Vercel Functions (email)
-tests/                 # Tests unitarios y de componentes
-.env                   # Variables locales (NO subir)
-.env.example           # Plantilla de variables
-vitest.config.ts       # Configuración de Vitest
-README.md              # Este archivo
+functions/               # Vercel Functions (email)
+tests/                   # Tests con Vitest
 ```
+
+Archivos clave:
+- `src/pages/LoginPage.tsx`, `src/pages/RegisterPage.tsx`: flujos de autenticación.
+- `src/features/auth/AuthContext.tsx`, `src/hooks/useAuth.ts`: manejo de estado de autenticación y redirecciones.
+- `src/pages/TasksPage.tsx`, `src/components/TodoForm.tsx`, `src/components/TodoList.tsx`, `src/components/TodoItem.tsx`: interfaz de tareas (CRUD y listado responsivo).
+- `functions/sendEmail.ts`: función serverless para enviar resumen por AWS SES.
+
+---
+
+## ✨ Funcionalidades de la interfaz (UI)
+
+La aplicación ofrece las siguientes funcionalidades directamente desde la interfaz:
+
+### Autenticación
+- Registro con email/contraseña y Google OAuth.
+- Login con email/contraseña y Google.
+- Redirección automática a `/tasks` tras autenticación exitosa.
+- Mensajes de error y éxito visibles en UI (ej. confirmación de registro antes de redirigir).
+
+### Gestión de tareas
+- Crear tarea: título, descripción, opción de marcar como completada al crear.
+- Editar tarea existente.
+- Marcar/Desmarcar tarea con un click (badge de estado interactivo).
+- Eliminar tarea.
+- Listado ordenado en una tabla en desktop y cards apiladas en móvil (mobile-first).
+- Fecha de creación visible y formateada.
+
+### Compartir / Envíos
+- Botón para enviar un resumen de las tareas por email (usa Vercel Function + AWS SES).
+
+### Navegación y diseño
+- Navbar minimalista con enlaces `Iniciar sesión`, `Registrarse` y `Acerca de`.
+- No existe página pública "Inicio" ni "Contacto" en el menú (eliminadas por requerimiento).
+- Footer con copyright y año dinámico.
+- Tema oscuro, contraste y espaciado pensados para lectura y foco en la tarea.
+
+### Accesibilidad y testing
+- Controles con `aria-label` y roles cuando aplica (mejora para usuarios de lectores de pantalla).
+- Tests unitarios y de componentes con selectors accesibles para asegurar estabilidad.
 
 ---
 
 ## 🔐 Variables de Entorno
 
-Las siguientes variables deben configurarse en `.env`:
+Copiar y configurar en `.env` (no subir):
 
 ### Firebase
 - `VITE_FIREBASE_API_KEY`
@@ -146,141 +141,67 @@ Las siguientes variables deben configurarse en `.env`:
 - `AWS_SES_REGION`
 - `AWS_SES_EMAIL`
 
-**⚠️ IMPORTANTE:** El archivo `.env` NUNCA debe ser cometido al repositorio. Está en `.gitignore`.
+> **Importante:** `.env` no debe subirse al repositorio (está en `.gitignore`).
 
 ---
 
-## 🧑‍💻 Desarrollo
+## 🧑‍💻 Desarrollo y pruebas
 
-### Primeras Contribuciones
+Comandos principales:
 
-1. Crear rama para tu funcionalidad: `git checkout -b feat/nueva-funcionalidad`
-2. Hacer commits semánticos: `git commit -m "feat: descripción"`
-3. Hacer push: `git push origin feat/nueva-funcionalidad`
-4. Crear Pull Request
+```bash
+npm install       # Instala dependencias
+npm run dev       # Levanta servidor de desarrollo (Vite)
+npm run build     # Compila para producción
+npm run preview   # Preview de build
+npm run test      # Ejecuta tests con Vitest
+npm run lint      # Ejecuta linters (si están configurados)
+```
 
-### Convenciones de Commit
+Tests:
+- La suite incluye tests de componentes y servicios con Vitest y React Testing Library.
+- Estado local de tests: 29 tests unitarios pasan.
 
-- `feat:` Nueva funcionalidad
-- `fix:` Corrección de bug
-- `docs:` Cambios en documentación
-- `style:` Cambios de formato
-- `test:` Agregar/modificar tests
-- `refactor:` Refactorización
-- `chore:` Configuración/dependencias
+Buenas prácticas:
+- Crear ramas para features: `git checkout -b feat/mi-feature`.
+- Usar mensajes de commit semánticos (`feat:`, `fix:`, `chore:`...).
 
 ---
 
 ## 🚀 Deploy en Vercel
 
-**🎉 Aplicación en Producción:** https://proyecto-m4-juan-arias.vercel.app
+1. Conectar repositorio a Vercel.
+2. Configurar variables de entorno en el dashboard de Vercel (usar `VITE_` para variables que se exponen al cliente).
+3. Cada push a `main` puede disparar deploy automático.
 
-### Pasos de Despliegue
-
-1. **Conectar repositorio GitHub con Vercel**
-2. **Configurar variables de entorno en Vercel**
-3. **Deploy automático** en cada push a main
-
-### Variables en Vercel
-
-- Frontend: `VITE_FIREBASE_*` (con prefijo VITE_)
-- Serverless: `AWS_*` (sin prefijo)
-
-### Flujo en Producción
-
-1. Registrarse con correo o Google OAuth
-2. Iniciar sesión
-3. Crear, editar y eliminar tareas
-4. Enviar resumen de tareas por email
+URL de producción (ejemplo): `https://proyecto-m4-juan-arias.vercel.app` (ajusta según tu cuenta y proyecto).
 
 ---
 
 ## 📝 Hitos del Proyecto
 
-- [x] Hito 1: Setup Inicial
-- [x] Hito 2: Configuración de Firebase
-- [x] Hito 3: Autenticación
-- [x] Hito 4: Rutas Protegidas
-- [x] Hito 5: Modelo de Datos y Seguridad
-- [x] Hito 6: CRUD de Tareas
-- [x] Hito 7: Email con AWS SES
-- [x] Hito 8: Testing (29 tests pasando)
-- [x] Hito 9: Deploy en Vercel
-
-**Estado:** ✅ Proyecto completo y funcional en producción
+- Hito 1: Setup Inicial
+- Hito 2: Configuración de Firebase
+- Hito 3: Autenticación
+- Hito 4: Rutas Protegidas
+- Hito 5: Modelo de Datos y Seguridad
+- Hito 6: CRUD de Tareas
+- Hito 7: Email con AWS SES
+- Hito 8: Testing (tests unitarios y de componentes)
+- Hito 9: Deploy en Vercel
 
 ---
 
----
+## 🤝 Contribuir
 
-## � Notas sobre el Desarrollo con IA
-
-Este proyecto fue desarrollado utilizando GitHub Copilot como herramienta de asistencia:
-
-- **Scaffolding y arquitectura:** Generación de estructura de carpetas y configuración inicial
-- **Componentes React:** Escritura de componentes con TypeScript y patrones reutilizables
-- **Servicios:** Integración con Firebase Authentication, Firestore y AWS SES
-- **Testing:** Creación de tests unitarios y de componentes con Vitest y React Testing Library
-- **Configuración:** Setup de Vite, Firebase, Vercel Functions y variables de entorno
-- **Debugging:** Diagnóstico de errores en rutas, autenticación OAuth y manejo de CORS
-
-La IA facilitó la velocidad de desarrollo mientras el estudiante se enfocó en la arquitectura, flujos de negocio y toma de decisiones técnicas.
-
----
-
-## �🤝 Contribuir
-
-Este proyecto es un proyecto integrador de aprendizaje. Siéntete libre de sugerir mejoras o reportar issues.
+Proyecto integrador educativo (Soy Henry M4). Si quieres contribuir:
+1. Abre un issue describiendo la propuesta.
+2. Crea una rama y un Pull Request.
 
 ---
 
 ## 📄 Licencia
 
-Proyecto educativo - Soy Henry M4
+Proyecto educativo — Soy Henry M4
 
----
-
-**Última actualización:** 4 de mayo de 2026
-      tseslint.configs.stylisticTypeChecked,
-
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
-```
-
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
-
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
-
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
-```
+**Última actualización:** 6 de mayo de 2026
