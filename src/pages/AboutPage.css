@@ -1,0 +1,92 @@
+.about-page {
+  min-height: 100vh;
+  background: #0f0f0f;
+  padding: 2rem 1rem;
+}
+
+.about-container {
+  max-width: 700px;
+  margin: 0 auto;
+  background: #1a1a1a;
+  padding: 2rem;
+  border-radius: 4px;
+  border: 1px solid #2a2a2a;
+}
+
+.about-container h1 {
+  font-size: 1.8rem;
+  color: #f0f0f0;
+  margin-bottom: 1.5rem;
+  text-align: center;
+  font-weight: 600;
+}
+
+.about-section {
+  margin-bottom: 2rem;
+}
+
+.about-section h2 {
+  font-size: 1.2rem;
+  color: #f0f0f0;
+  margin-bottom: 0.8rem;
+  font-weight: 600;
+}
+
+.about-section p {
+  color: #b0b0b0;
+  line-height: 1.6;
+  font-size: 0.95rem;
+  margin-bottom: 0.8rem;
+}
+
+.about-list {
+  list-style: none;
+  padding: 0;
+}
+
+.about-list li {
+  color: #b0b0b0;
+  line-height: 1.8;
+  font-size: 0.95rem;
+  margin-bottom: 0.5rem;
+}
+
+.about-list strong {
+  color: #6366f1;
+}
+
+.tech-stack {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
+  gap: 0.8rem;
+  margin-top: 1rem;
+}
+
+.tech-item {
+  background: #252525;
+  color: #6366f1;
+  padding: 0.8rem;
+  border-radius: 4px;
+  text-align: center;
+  font-weight: 500;
+  font-size: 0.85rem;
+  border: 1px solid #2a2a2a;
+}
+
+@media (max-width: 768px) {
+  .about-container {
+    padding: 1.5rem;
+  }
+
+  .about-container h1 {
+    font-size: 1.4rem;
+  }
+
+  .about-section h2 {
+    font-size: 1rem;
+  }
+
+  .tech-stack {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}

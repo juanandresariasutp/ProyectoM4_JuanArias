@@ -1,5 +1,5 @@
 import { useState, type FormEvent } from 'react'
-import { Link, useNavigate } from 'react-router-dom'
+import { Link } from 'react-router-dom'
 
 import { useAuthContext } from '../features/auth/AuthContext'
 
@@ -12,7 +12,6 @@ const LoginForm = () => {
   const { login, loginWithProvider, loading, error } = useAuthContext()
   const [formValues, setFormValues] = useState(initialValues)
   const [submitting, setSubmitting] = useState(false)
-  const navigate = useNavigate()
 
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = event.target
@@ -30,7 +29,6 @@ const LoginForm = () => {
     try {
       await login(formValues)
       setFormValues(initialValues)
-      navigate('/tasks')
     } finally {
       setSubmitting(false)
     }
@@ -40,7 +38,6 @@ const LoginForm = () => {
     setSubmitting(true)
     try {
       await loginWithProvider()
-      navigate('/tasks')
     } finally {
       setSubmitting(false)
     }
@@ -50,40 +47,51 @@ const LoginForm = () => {
 
   return (
     <form onSubmit={handleSubmit}>
-      <h2>Iniciar sesión</h2>
+      <div className="form-group">
+        <label htmlFor="login-email">Correo electrónico</label>
+        <input
+          id="login-email"
+          name="email"
+          type="email"
+          placeholder="tu@email.com"
+          value={formValues.email}
+          onChange={handleChange}
+          required
+        />
+      </div>
 
-      <label htmlFor="login-email">Correo electrónico</label>
-      <input
-        id="login-email"
-        name="email"
-        type="email"
-        value={formValues.email}
-        onChange={handleChange}
-        required
-      />
+      <div className="form-group">
+        <label htmlFor="login-password">Contraseña</label>
+        <input
+          id="login-password"
+          name="password"
+          type="password"
+          placeholder="Tu contraseña"
+          value={formValues.password}
+          onChange={handleChange}
+          required
+        />
+      </div>
 
-      <label htmlFor="login-password">Contraseña</label>
-      <input
-        id="login-password"
-        name="password"
-        type="password"
-        value={formValues.password}
-        onChange={handleChange}
-        required
-      />
+      {error && <div className="error-message">{error}</div>}
 
-      {error ? <p role="alert">{error}</p> : null}
+      <div className="button-group">
+        <button type="submit" className="btn btn-primary" disabled={isBusy}>
+          {isBusy ? '⏳ Ingresando...' : '→ Ingresar'}
+        </button>
 
-      <button type="submit" disabled={isBusy}>
-        {isBusy ? 'Ingresando...' : 'Entrar'}
-      </button>
+        <div className="divider">o continúa con</div>
 
-      <button type="button" onClick={handleGoogle} disabled={isBusy}>
-        Continuar con Google
-      </button>
+        <button type="button" className="btn btn-secondary" onClick={handleGoogle} disabled={isBusy}>
+          <span className="google-icon" aria-hidden="true">
+            <span className="google-icon-letter">G</span>
+          </span>
+          Google
+        </button>
+      </div>
 
-      <p>
-        ¿No tienes cuenta? <Link to="/register">Regístrate</Link>
+      <p className="signin-link">
+        ¿Sin cuenta? <Link to="/register">Crea una</Link>
       </p>
     </form>
   )

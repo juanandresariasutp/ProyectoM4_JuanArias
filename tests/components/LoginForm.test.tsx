@@ -38,7 +38,7 @@ describe('LoginForm', () => {
 
     const emailInput = screen.getByLabelText(/Correo electrónico/i)
     const passwordInput = screen.getByLabelText(/Contraseña/i)
-    const submit = screen.getByRole('button', { name: /Entrar/i })
+    const submit = screen.getAllByRole('button')[0]
 
     await user.type(emailInput, 'login@example.com')
     await user.type(passwordInput, 'Login123!')
@@ -57,7 +57,8 @@ describe('LoginForm', () => {
       </MemoryRouter>
     )
 
-    const googleButton = screen.getByRole('button', { name: /Continuar con Google/i })
+    const buttons = screen.getAllByRole('button')
+    const googleButton = buttons[1]
 
     await user.click(googleButton)
 

@@ -1,14 +1,17 @@
 import LoginForm from '../components/LoginForm'
+import './LoginPage.css'
 
 const LoginPage = () => {
   return (
-    <main>
-      <section>
-        <h1>Bienvenido</h1>
-        <p>Inicia sesión para gestionar tus tareas.</p>
+    <div className="login-page">
+      <div className="login-container">
+        <div className="login-header">
+          <h1>Iniciar sesión</h1>
+          <p>Accede a tu cuenta para gestionar tus tareas</p>
+        </div>
         <LoginForm />
-      </section>
-    </main>
+      </div>
+    </div>
   )
 }
 

@@ -1,0 +1,172 @@
+.home-page {
+  min-height: 100vh;
+  background: #0f0f0f;
+}
+
+.hero {
+  background: #1a1a1a;
+  color: #f0f0f0;
+  padding: 4rem 2rem;
+  text-align: center;
+  border-bottom: 1px solid #2a2a2a;
+}
+
+.hero-content h1 {
+  font-size: 2.5rem;
+  margin-bottom: 1rem;
+  font-weight: 600;
+  letter-spacing: -0.02em;
+}
+
+.hero-content > p {
+  font-size: 1rem;
+  margin-bottom: 0.5rem;
+  color: #b0b0b0;
+}
+
+.hero-subtitle {
+  font-size: 0.95rem;
+  margin-bottom: 2rem;
+  color: #808080;
+  max-width: 500px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.hero-buttons {
+  display: flex;
+  gap: 1rem;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+.btn {
+  padding: 0.7rem 1.5rem;
+  font-size: 0.9rem;
+  font-weight: 500;
+  border-radius: 4px;
+  text-decoration: none;
+  transition: all 0.3s ease;
+  display: inline-block;
+  cursor: pointer;
+}
+
+.btn-primary {
+  background: #6366f1;
+  color: #f0f0f0;
+  border: 1px solid #6366f1;
+}
+
+.btn-primary:hover {
+  background: #7c7fed;
+  border-color: #7c7fed;
+}
+
+.btn-secondary {
+  background: transparent;
+  color: #b0b0b0;
+  border: 1px solid #2a2a2a;
+}
+
+.btn-secondary:hover {
+  color: #f0f0f0;
+  border-color: #6366f1;
+}
+
+.btn-large {
+  padding: 0.8rem 2rem;
+  font-size: 1rem;
+}
+
+.features {
+  max-width: 900px;
+  margin: 2rem auto;
+  padding: 0 2rem;
+}
+
+.features h2 {
+  font-size: 1.2rem;
+  text-align: center;
+  margin-bottom: 2rem;
+  color: #f0f0f0;
+  font-weight: 600;
+}
+
+.features-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 1.5rem;
+}
+
+.feature-card {
+  background: #1a1a1a;
+  padding: 1.5rem;
+  border-radius: 4px;
+  text-align: center;
+  border: 1px solid #2a2a2a;
+  transition: all 0.3s ease;
+}
+
+.feature-card:hover {
+  border-color: #6366f1;
+  background: #252525;
+}
+
+.feature-icon {
+  font-size: 2rem;
+  margin-bottom: 0.8rem;
+}
+
+.feature-card h3 {
+  font-size: 1rem;
+  margin-bottom: 0.5rem;
+  color: #f0f0f0;
+  font-weight: 600;
+}
+
+.feature-card p {
+  color: #808080;
+  line-height: 1.5;
+  font-size: 0.9rem;
+}
+
+.cta {
+  background: #1a1a1a;
+  color: #f0f0f0;
+  padding: 2rem;
+  text-align: center;
+  margin-top: 2rem;
+  border-top: 1px solid #2a2a2a;
+}
+
+.cta h2 {
+  font-size: 1.5rem;
+  margin-bottom: 1rem;
+  font-weight: 600;
+}
+
+@media (max-width: 768px) {
+  .hero {
+    padding: 2rem 1rem;
+  }
+
+  .hero-content h1 {
+    font-size: 1.8rem;
+  }
+
+  .features {
+    padding: 0 1rem;
+  }
+
+  .features h2 {
+    font-size: 1rem;
+  }
+
+  .hero-buttons {
+    flex-direction: column;
+  }
+
+  .btn {
+    width: 100%;
+  }
+}
