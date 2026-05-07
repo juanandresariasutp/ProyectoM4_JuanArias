@@ -41,7 +41,7 @@ Aplicación web SPA minimalista para crear, organizar y compartir tareas persona
 
 1. Clona el repositorio:
 ```bash
-git clone <URL_DEL_REPOSITORIO>
+git clone <https://github.com/juanandresariasutp/ProyectoM4_JuanArias.git>
 cd proyecto-integrador
 ```
 
@@ -192,16 +192,26 @@ URL de producción (ejemplo): `https://proyecto-m4-juan-arias.vercel.app` (ajust
 
 ---
 
-## 🤝 Contribuir
+## 🤖 Uso de IA Durante el Desarrollo <a id="uso-ia"></a>
 
-Proyecto integrador educativo (Soy Henry M4). Si quieres contribuir:
-1. Abre un issue describiendo la propuesta.
-2. Crea una rama y un Pull Request.
+Se usó GitHub Copilot para acelerar implementación y refactorización.
+
+Registro completo del uso de IA en el proyecto:
+- [Documentación IA](Documentación%20IA.md)
+
+La arquitectura final y las validaciones fueron revisadas manualmente.
 
 ---
 
-## 📄 Licencia
 
-Proyecto educativo — Soy Henry M4
+## Autor del proyecto ✍️
 
-**Última actualización:** 6 de mayo de 2026
+Juan Andrés Arias Tascón
+
+🎓 Ingeniero de Sistemas | Desarrollador de Software  
+👨‍💻 Desarrollador Web en formación – 2026
+
+⭐ Proyecto creado con fines educativos y de práctica.
+
+Módulo 4 - Proyecto Integrador  
+Soy Henry - Bootcamp de Desarrollo Full Stack
